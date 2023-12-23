@@ -38,6 +38,7 @@ const user = new mongoose.Schema(
     ],
     visits: { type: Number, default: 0 },
     messages: [{ senderName: String, senderEmail: String, msg: String }],
+    visitors: [{ type: mongoose.Schema.Types.ObjectId, ref: "Visitors" }],
   },
   { timestamps: true }
 );

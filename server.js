@@ -21,7 +21,9 @@ import { updateProjects } from "./controller/updateProjects.js";
 import { sendMatchingTechs } from "./controller/sendMatchingTechs.js";
 import { updateBasicInfo } from "./controller/UpdateBasicInfo.js";
 import { getUser } from "./controller/getUserData.js";
-// import { updateProjects } from "./controller/updateProjects.js";
+import { updateVisits } from "./controller/updateVisits.js";
+import { visitorsRoute } from "./routes/visitors.js";
+import { messageRoute } from "./routes/message.js";
 
 const server = express();
 
@@ -61,6 +63,9 @@ server.post("/projects", authenticateUser, updateProjects);
 server.get("/tech", authenticateUser, sendMatchingTechs);
 server.put("/basicinfo", authenticateUser, updateBasicInfo);
 server.get("/:email", getUser);
+server.put("/visit/:email", updateVisits);
+server.use("/visitor", visitorsRoute);
+server.use(messageRoute);
 
 connectToMongoDB()
   .then(() => console.log("Connected to DB"))
