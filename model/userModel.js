@@ -1,3 +1,4 @@
+import { ref } from "firebase/storage";
 import mongoose from "mongoose";
 const user = new mongoose.Schema(
   {
@@ -37,7 +38,7 @@ const user = new mongoose.Schema(
       },
     ],
     visits: { type: Number, default: 0 },
-    messages: [{ senderName: String, senderEmail: String, msg: String }],
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Messages" }],
     visitors: [{ type: mongoose.Schema.Types.ObjectId, ref: "Visitors" }],
   },
   { timestamps: true }
