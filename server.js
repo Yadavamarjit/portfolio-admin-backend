@@ -25,12 +25,13 @@ import { updateVisits } from "./controller/updateVisits.js";
 import { visitorsRoute } from "./routes/visitors.js";
 import { messageRoute } from "./routes/message.js";
 import { userRouter } from "./routes/user.js";
+import { techRoute } from "./routes/techs.js";
 
 const server = express();
 const corsOptions = {
   origin: "https://portfolio-amarjit.netlify.app",
 };
-server.use(cors(corsOptions));
+server.use(cors());
 server.use(express.json());
 
 const firebaseApp = initializeFirebase();
@@ -70,7 +71,7 @@ server.put("/visit/:email", updateVisits);
 server.use("/visitor", visitorsRoute);
 server.use(messageRoute);
 server.use("/user", userRouter);
-
+server.use("/techs", techRoute);
 connectToMongoDB()
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log(err));

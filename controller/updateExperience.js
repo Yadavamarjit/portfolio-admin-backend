@@ -2,7 +2,8 @@ import { USER } from "../model/userModel.js";
 
 export const updateExperience = async (req, res) => {
   const userEmail = req.email;
-  const { experience, id } = req.body;
+  const { experience } = req.body;
+  const { id } = experience;
 
   try {
     const user = await USER.findOne({ email: userEmail });
@@ -21,7 +22,7 @@ export const updateExperience = async (req, res) => {
       } else {
         user.experiences.push({ ...experience });
       }
-
+      console.log({ id, existingExperienceIndex });
       await user.save();
 
       return res

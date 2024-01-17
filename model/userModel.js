@@ -29,12 +29,12 @@ const user = new mongoose.Schema(
     ],
     projects: [
       {
-        name: String,
-        desc: String,
+        projectName: String,
+        description: String,
         projectUrl: String,
         img: String,
         techs: [String],
-        id: Number,
+        id: String,
       },
     ],
     visits: { type: Number, default: 0 },

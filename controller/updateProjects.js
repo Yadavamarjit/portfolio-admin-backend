@@ -14,17 +14,17 @@ export const updateProjects = async (req, res, next) => {
     const existingProjectIndex = user.projects.findIndex(
       (project) => project.id === id
     );
+    console.log({ projectData });
 
     if (existingProjectIndex !== -1) {
       user.projects[existingProjectIndex] = {
-        ...user.projects[existingProjectIndex],
         ...projectData,
       };
     } else {
       // Add new project
       user.projects.push({ id, ...projectData });
     }
-
+    console.log(user);
     await user.save();
 
     return res.status(200).json({

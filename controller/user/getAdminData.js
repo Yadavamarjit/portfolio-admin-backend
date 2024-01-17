@@ -6,19 +6,17 @@ import { internalServerError } from "../../utils/errorUtils.js";
 export const getAdminData = async (req, res) => {
   const email = req.email;
   try {
-    const user = await USER.findOne({ email }).populate("messages");
-    //   .populate({
-    //     path: "messages",
-    //     model: "Messages",
-    //     select: {},
-    //     match: { to: email },
-    //   })
-    //   .populate({
-    //     path: "visitors",
-    //     model: "Visitors",
-    //     select: {},
-    //     match: { adminEmail: email },
-    //   });
+    const user = await USER.findOne({ email })
+      .populate({
+        path: "visitors",
+        model: "Visitors",
+        match: { adminEmail: email },
+      })
+      .populate({
+        path: "messages",
+        model: "Messages",
+        match: { to: email },
+      });
     console.log("Fetched user data", user);
     return res.json({ user });
   } catch (err) {

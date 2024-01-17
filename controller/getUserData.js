@@ -1,5 +1,5 @@
 import { USER } from "../model/userModel.js";
-import { invalidreq } from "../utils/errorUtils.js";
+import { internalServerError, invalidreq } from "../utils/errorUtils.js";
 
 export const getUser = async (req, res, next) => {
   const email = req.params.email;
@@ -7,11 +7,13 @@ export const getUser = async (req, res, next) => {
   try {
     const user = await USER.findOne({ email });
     if (!user) {
-      return invalidreq(400, "User not found");
+      return invalidreq(400, "User not found", res);
     }
     const userObj = { ...user._doc };
     delete userObj.password;
-    console.log({ ...user });
+    console.log({ ...user }, "===========");
     res.json({ ...userObj });
-  } catch (err) {}
+  } catch (err) {
+    return internalServerError(res);
+  }
 };
