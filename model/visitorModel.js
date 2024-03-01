@@ -15,6 +15,7 @@ const visitors = new mongoose.Schema({
   messaged: Boolean,
   emailId: String,
   name: String,
+  device: String,
 });
 
 export const Visitors = mongoose.model("Visitors", visitors);
