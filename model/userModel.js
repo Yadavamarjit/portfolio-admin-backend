@@ -35,6 +35,7 @@ const user = new mongoose.Schema(
         img: String,
         techs: [String],
         id: String,
+        link: String,
       },
     ],
     visits: { type: Number, default: 0 },
